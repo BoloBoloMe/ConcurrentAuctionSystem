@@ -10,6 +10,7 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.net.ssl.SSLContext;
 
@@ -20,6 +21,7 @@ import javax.net.ssl.SSLContext;
  * @author share
  * @date 2020/7/27 20:53
  */
+@Slf4j
 public class WebSocketServer {
     static final boolean SSL = System.getProperty("ssl") != null;
     static final int PORT = Integer.parseInt(System.getProperty("port", SSL ? "8443" : "8080"));
@@ -35,7 +37,7 @@ public class WebSocketServer {
         }
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup(2);
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
@@ -49,6 +51,7 @@ public class WebSocketServer {
                     (SSL ? "https" : "http") + "://127.0.0.1:" + PORT + '/');
 
             ch.closeFuture().sync();
+            log.info("main thread is close. thread name is {}", Thread.currentThread().getName());
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
