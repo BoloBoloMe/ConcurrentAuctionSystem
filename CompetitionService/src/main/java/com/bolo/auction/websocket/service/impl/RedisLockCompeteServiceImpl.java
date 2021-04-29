@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedisLockCompeteServiceImpl implements CompeteService {
     @Override
-    public boolean quote(String acocuntId, String targetId, Long price) {
+    public boolean quote(String acocuntId, Integer targetId, Long price) {
         return false;
     }
 }

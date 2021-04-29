@@ -16,5 +16,5 @@ public interface CompeteService {
      * @param targetId 标的id
      * @param price 出价
      */
-    boolean quote(String acocuntId, String targetId, Long price);
+    boolean quote(String acocuntId, Integer targetId, Long price);
 }

@@ -1,7 +1,13 @@
 package com.bolo.auction.websocket.service.impl;
 
 import com.bolo.auction.websocket.service.CompeteService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.concurrent.atomic.AtomicLongArray;
 
 /**
  * Redis脚本版应价实现
@@ -15,8 +21,25 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RedisScriptCompeteServiceImpl implements CompeteService {
+    // 本机出过的最新价,数组下标即场次号编号
+    private static final AtomicLongArray array = new AtomicLongArray(1000);
+    @Autowired
+    private RedisScript<String> script;
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+
+
     @Override
-    public boolean quote(String acocuntId, String targetId, Long price) {
-        return false;
+    public boolean quote(String acocuntId, Integer targetId, Long price) {
+        // 跟本进程内缓存的最高出价进行比较，如果高于该价格才有继续执行的资格
+        long lastPrice = array.get(targetId);
+        if (lastPrice > price) {
+            return false;
+        }
+        array.compareAndSet(targetId, lastPrice, price);
+        // todo：异步发送MQ,应价记录入库
+        // todo：冻结用户金额
+        String result = redisTemplate.execute(script, Collections.singletonList("compete"), targetId.toString(), "countdown", "last_price", price.toString());
+        return "succeed".equals(result);
     }
 }

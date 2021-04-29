@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bolo.auction.websocket.service.impl.*;
 
-import javax.annotation.PostConstruct;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
@@ -25,29 +20,10 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 @RestController
 @RequestMapping("http/")
 public class CompetitionController {
-    private final AtomicInteger index = new AtomicInteger(0);
-    private final AtomicReferenceArray<Boolean> resultSet = new AtomicReferenceArray<>(1000);
-    private final ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1);
-
-    @PostConstruct
-    public void runScheduled() {
-        scheduledThreadPool.scheduleAtFixedRate(() -> {
-            int succeedCount = 0;
-            for (int index = 0; index < resultSet.length(); index++) {
-                if (resultSet.get(index)) {
-                    succeedCount++;
-                }
-            }
-            System.out.println(succeedCount / 200);
-        }, 5, 5, TimeUnit.SECONDS);
-    }
-
-
     @RequestMapping("{type}/quote")
-    public RestResponse<Boolean> quote(@PathVariable("type") String type, String acocuntId, String targetId, Long price) {
-        Boolean result = getService(type).quote(acocuntId, targetId, price);
-        int indexInt = index.incrementAndGet();
-        resultSet.compareAndSet(indexInt, false, result);
+    public RestResponse<Boolean> quote(@PathVariable("type") String type, String accountId, Integer targetId, Long price) {
+        System.out.println(price);
+        Boolean result = getService(type).quote(accountId, targetId, price);
         return new RestResponse<>(result);
     }
 
@@ -66,7 +42,7 @@ public class CompetitionController {
         } else {
             return new CompeteService() {
                 @Override
-                public boolean quote(String acocuntId, String targetId, Long price) {
+                public boolean quote(String acocuntId, Integer targetId, Long price) {
                     return false;
                 }
             };

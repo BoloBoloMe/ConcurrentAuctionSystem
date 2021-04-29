@@ -30,12 +30,12 @@ public class MemoryCompeteServiceImpl implements CompeteService {
      * @param price     出价
      */
     @Override
-    public boolean quote(String acocuntId, String targetId, Long price) {
+    public boolean quote(String acocuntId, Integer targetId, Long price) {
         AtomicLong target = cache.get(acocuntId);
         long oldValue;
         do {
             oldValue = target.get();
-            if (oldValue > price) {
+            if (oldValue >= price) {
                 return false;
             }
         } while (!target.compareAndSet(oldValue, price));

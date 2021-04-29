@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
@@ -50,7 +51,7 @@ public class BunchmarkRunner {
                 break;
             }
         }
-
+        target = target.trim();
         System.out.println("创建连接数：" + connectNum);
         System.out.println("创建线程数：" + threadNum);
         System.out.println("请求地址：" + target);
@@ -103,6 +104,7 @@ public class BunchmarkRunner {
      * 执行任务的实现类
      */
     public static class TaskRunner implements Runnable {
+        private static final Random RANDOM = new Random();
         private String target;
         private CountDownLatch latch;
         private CountDownLatch finishCouter;
@@ -123,7 +125,7 @@ public class BunchmarkRunner {
             System.out.println("线程" + runnerThreadName + "已就位");
             latch.countDown();
             count.incrementAndGet();
-            HttpURLConnection connection = (HttpURLConnection) new URL(target).openConnection();
+            HttpURLConnection connection = (HttpURLConnection) new URL(target + (Math.abs(RANDOM.nextInt(1000)))).openConnection();
             connection.setRequestMethod("GET");
             //write header
             connection.setRequestProperty("Content-Type", "application/html");
