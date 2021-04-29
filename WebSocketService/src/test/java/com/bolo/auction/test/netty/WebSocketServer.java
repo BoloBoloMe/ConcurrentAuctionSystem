@@ -12,8 +12,6 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.net.ssl.SSLContext;
-
 
 /**
  * Netty WebSocket 服务端实例
