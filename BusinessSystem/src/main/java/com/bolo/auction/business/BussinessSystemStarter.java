@@ -15,9 +15,4 @@ public class BussinessSystemStarter {
         log.info("业务系统启动中...");
         SpringApplication.run(BussinessSystemStarter.class, args);
     }
-
-    @RequestMapping("hello")
-    public String hello() {
-        return "hello";
-    }
 }

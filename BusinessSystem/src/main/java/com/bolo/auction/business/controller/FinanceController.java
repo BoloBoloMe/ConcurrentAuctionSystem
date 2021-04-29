@@ -2,6 +2,7 @@ package com.bolo.auction.business.controller;
 
 import com.bolo.auction.business.common.entity.RestResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Time    : 10:30
  */
 @RestController
+@RequestMapping("finance/")
 public class FinanceController {
     /**
      * 冻结应价接口
@@ -21,8 +23,8 @@ public class FinanceController {
      * @param price     报价
      * @return
      */
-    @RequestMapping("/finance/quote/free")
-    public RestResponse<Boolean> freezeQuotePrice(String acocuntId, Long price) {
+    @RequestMapping("quote/free")
+    public RestResponse<Boolean> freezeQuotePrice(@RequestParam String acocuntId, @RequestParam Long price) {
         return new RestResponse<>(true);
     }
 }
