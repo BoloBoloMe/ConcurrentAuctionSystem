@@ -7,14 +7,14 @@ package com.bolo.auction.websocket.service;
  * Date    : 2021/4/29
  * Time    : 11:18
  */
-public interface CompetitionService {
+public interface CompeteService {
     /**
      * 应价接口
      *
-     * 大体流程：出价低于当前价 -> 冻结用户金额 -> 更新最新价
+     * 大体流程：倒计时是否归零 -> 比较应价与当前最新价 -> 更新最新价 -> 更新中标用户
      * @param acocuntId 用户id
      * @param targetId 标的id
      * @param price 出价
      */
-    void quote(String acocuntId, String targetId, Long price);
+    boolean quote(String acocuntId, String targetId, Long price);
 }

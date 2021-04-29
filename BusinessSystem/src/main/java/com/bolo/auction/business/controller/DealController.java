@@ -20,7 +20,7 @@ public class DealController {
      *
      * @param targetId 标的ID,Redis缓存的标的信息的key
      */
-    @RequestMapping("contrac/generate/${targetId}")
+    @RequestMapping("contrac/generate/{targetId}")
     public RestResponse<Boolean> generateContract(@PathVariable("targetId") String targetId) {
         return new RestResponse<>(true);
     }

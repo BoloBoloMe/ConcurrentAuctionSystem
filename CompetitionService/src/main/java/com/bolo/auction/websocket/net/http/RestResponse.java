@@ -1,4 +1,5 @@
-package com.bolo.auction.business.common.entity;
+package com.bolo.auction.websocket.net.http;
+
 
 import lombok.Data;
 
