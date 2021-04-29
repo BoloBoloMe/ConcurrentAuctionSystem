@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>WebSocketService</artifactId>
-    <description>WebSocket服务端</description>
+    <artifactId>CompetitionService</artifactId>
+    <description>竞价服务</description>
 
     <dependencies>
         <dependency>

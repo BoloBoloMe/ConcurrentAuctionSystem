@@ -68,3 +68,5 @@ fabric.properties
 /Middleground.iml
 /target/
 /middleground-log/
+
+*.iml

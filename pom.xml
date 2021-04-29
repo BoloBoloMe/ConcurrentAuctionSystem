@@ -10,7 +10,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <description>竞价拍卖系统</description>
     <modules>
-        <module>WebSocketService</module>
+        <module>CompetitionService</module>
         <module>BusinessSystem</module>
     </modules>
 
