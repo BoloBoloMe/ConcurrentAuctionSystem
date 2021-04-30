@@ -1,4 +1,4 @@
-package com.bolo.auction.business.common.entity;
+package com.bolo.auction.common.entity;
 
 import lombok.Data;
 

@@ -12,16 +12,23 @@
     <modules>
         <module>CompetitionService</module>
         <module>BusinessSystem</module>
+        <module>CommonApi</module>
     </modules>
 
     <properties>
         <spring-boot-version>2.3.1.RELEASE</spring-boot-version>
         <lombok-version>1.18.12</lombok-version>
         <netty-version>4.1.51.Final</netty-version>
+        <project>0.0.1-SNAPSHOT</project>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.bolo.auction</groupId>
+                <artifactId>CommonApi</artifactId>
+                <version>${project}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>

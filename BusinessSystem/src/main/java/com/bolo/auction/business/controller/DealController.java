@@ -1,6 +1,6 @@
 package com.bolo.auction.business.controller;
 
-import com.bolo.auction.business.common.entity.RestResponse;
+import com.bolo.auction.common.entity.RestResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,5 +1,6 @@
 package com.bolo.auction.websocket.net.http;
 
+import com.bolo.auction.common.entity.RestResponse;
 import com.bolo.auction.websocket.service.CompeteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bolo.auction.websocket.service.impl.*;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 
 /**
  * @author : LuoJingYan
