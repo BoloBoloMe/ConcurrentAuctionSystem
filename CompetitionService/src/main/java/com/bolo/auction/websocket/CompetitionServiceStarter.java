@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CompetitionServiceStarter {
     public static void main(String[] args) {
-        log.info("WebSocket服务端启动中...");
+        log.info("CompetitionService服务端启动中...");
         SpringApplication.run(CompetitionServiceStarter.class, args);
     }
 }
